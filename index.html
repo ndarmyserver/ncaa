@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NCAA Tournament Logo Picker</title>
+    <style type="text/css">
+      #content {
+        width: 1024px;
+        margin: 0 auto;
+      }
+
+      /*Logo Pictues*/
+      #a, #b {
+        display:inline;
+        width: 455px;
+        height: 455px;
+      }
+
+      .vertical-line {
+        width: 5px;
+        background-color: #666666;
+        height: 500px;
+        display: inline-block;
+        margin: 0px 50px;
+      }
+
+      /*For Bracket Graphics*/
+      #bracket {
+        width: 1024px;
+        height: 905px;
+        background-image: url("img/bracket.png");
+        position: absolute;
+      }
+
+      #champ {
+        display:block;
+        width: 125px;
+        height: 125px;
+        margin: 385px auto 0;
+      }
+
+      .button {
+        width: 100px;
+        height: 37px;
+        padding: 5px;
+        background-color: #666666;
+        font-family: sans-serif;
+        color: white;
+        position: absolute;
+        text-align: center;
+        top: 100px;
+        left: 464px;
+      }
+
+      .teams{
+        width: 100px;
+        height: 10px;
+        font-size: 8pt;
+        position: absolute;
+        font-family: sans-serif
+      }
+
+      /*To Position Team Names*/
+      .round1L {
+        left: 22px;
+        text-align: left;
+      }
+      .round2L {
+        left: 104px;
+        text-align: left;
+      }
+      .round3L {
+        left: 184px;
+        text-align: left;
+      }
+      .round4L {
+        left: 265px;
+        text-align: left;
+      }
+      .round5L {
+        left: 348px;
+        text-align: left;
+      }
+      .round6L {
+        top: 345px;
+        left: 435px;
+        text-align: left;
+      }
+
+      .round1R {
+        left:900px;
+        text-align: right;
+      }
+      .round2R {
+        left:817px;
+        text-align: right;
+      }
+      .round3R {
+        left:736px;
+        text-align: right;
+      }
+      .round4R {
+        left: 655px;
+        text-align: right;
+      }
+      .round5R {
+        left: 576px;
+        text-align: right;
+      }
+      .round6R {
+        top: 578px;
+        left: 491px;
+        text-align: right;
+      }
+      .round7 {
+        top: 520px;
+        width:100%;
+        font-size: 18pt;
+        text-align: center;
+      }
+
+      #t1 { top: 59px; }
+      #t16 { top: 85px; }
+      #t8 { top: 111px; }
+      #t9 { top: 137px; }
+      #t5 { top: 163px; }
+      #t12 { top: 189px; }
+      #t4 { top: 215px; }
+      #t13 { top: 240px; }
+      #t6 { top: 266px; }
+      #t11 { top: 292px; }
+      #t3 { top: 318px; }
+      #t14 { top: 344px; }
+      #t7 { top: 370px; }
+      #t10 { top: 396px; }
+      #t2 { top: 422px; }
+      #t15 { top: 449px; }
+      #t2-1 { top: 73px; }
+      #t2-8 { top: 125px; }
+      #t2-5 { top: 177px; }
+      #t2-4 { top: 229px; }
+      #t2-6 { top: 280px; }
+      #t2-3 { top: 332px; }
+      #t2-7 { top: 384px; }
+      #t2-2 { top: 436px; }
+      #t3-1 { top: 99px; }
+      #t3-4 { top: 203px; }
+      #t3-3 { top: 306px; }
+      #t3-2 { top: 410px; }
+      #t4-1 { top: 151px; }
+      #t4-2 { top: 358px; }
+      #t5-1 { top: 255px; }
+
+      #b1 { top: 475px; }
+      #b16 { top: 500px; }
+      #b8 { top: 526px; }
+      #b9 { top: 552px; }
+      #b5 { top: 578px; }
+      #b12 { top: 604px; }
+      #b4 { top: 630px; }
+      #b13 { top: 656px; }
+      #b6 { top: 681px; }
+      #b11 { top: 708px; }
+      #b3 { top: 734px; }
+      #b14 { top: 760px; }
+      #b7 { top: 786px; }
+      #b10 { top: 811px; }
+      #b2 { top: 838px; }
+      #b15 { top: 864px; }
+      #b2-1 { top: 488px; }
+      #b2-8 { top: 539px; }
+      #b2-5 { top: 591px; }
+      #b2-4 { top: 643px; }
+      #b2-6 { top: 695px; }
+      #b2-3 { top: 747px; }
+      #b2-7 { top: 799px; }
+      #b2-2 { top: 851px; }
+      #b3-1 { top: 513px; }
+      #b3-4 { top: 617px; }
+      #b3-3 { top: 721px; }
+      #b3-2 { top: 825px; }
+      #b4-1 { top: 565px; }
+      #b4-2 { top: 773px; }
+      #b5-1 { top: 670px; }
+    </style>
+  </head>
+  <body onload="firstGame()">
+    <div id="content">
+    <img id="a" src=# onclick="select('left')">
+    <div class="vertical-line"></div>
+    <img id="b" src=# onclick="select('right')">
+    </div>
+    <p id="test"></p>
+
+    <script>
+      var game = 1;
+      var a = 1
+      var b = 16;
+      var i = 0;
+      var region = ['s','w','e','m'];
+      var teams = new Array();
+      var finalfour = new Array();
+      var nextGame = new Array();
+      var allTeams = {
+        "m1": "Virginia", "m2": "Michigan St", "m3": "Utah", "m4": "Iowa St", "m5": "Purdue", "m6": "Seton Hall", "m7": "Dayton", "m8": "Texas Tech", "m9": "Butler", "m10": "Syracuse", "m11": "Gonzaga", "m12": "Little Rock", "m13": "Iona", "m14": "Fresno St", "m15": "Middle Tenn", "m16": "Hampton",
+        "w1": "Oregon", "w2": "Oklahoma", "w3": "Texas A&M", "w4": "Duke", "w5": "Baylor", "w6": "Texas", "w7": "Oregon St", "w8": "St Joesph's", "w9": "Cincinnati", "w10": "VCU", "w11": "UNI", "w12": "Yale", "w13": "UNCW", "w14": "Green Bay", "w15": "CSU Bakersfield", "w16": "HC-Southern",
+        "e1": "North Carolina", "e2": "Xavier", "e3": "West Virginia", "e4": "Kentucky", "e5": "Indiana", "e6": "Notre Dame", "e7": "Wisconsin", "e8": "USC", "e9": "Providence", "e10": "Pittsburgh", "e11": "Michigan-Tulsa", "e12": "Chattanooga", "e13": "Stony Brook", "e14": "SF Austin", "e15": "Weber St", "e16": "FGCU-FDU",
+        "s1": "Kansas", "s2": "VIllanova", "s3": "Miami", "s4": "California", "s5": "Maryland", "s6": "Arizona", "s7": "Iowa", "s8": "Colorado", "s9": "Connecticut", "s10": "Temple", "s11": "Vanderbilt-WSU", "s12": "South Dakota St", "s13": "Hawaii", "s14": "Buffalo", "s15": "UNC Asheville", "s16": "Austin Peay",
+      };
+
+      //Select random picture sides (so higher seed isn't always on left)
+      function randomPic(pic1, pic2) {
+        var r = Math.random();
+
+        if (r < 0.5) {
+          return [document.getElementById("a").src = nextGame[0], document.getElementById("b").src = nextGame[1]];
+        } else {
+          return [document.getElementById("a").src = nextGame[1], document.getElementById("b").src = nextGame[0]];
+        }
+      }
+
+      //Sort pictures for 1st game
+      function firstGame() {
+        nextGame[0] = 'img/' + region[i] + a + '.png';
+        nextGame[1] = 'img/' + region[i] + b + '.png';
+
+        randomPic (nextGame[0], nextGame[1]);
+      }
+
+      function selectWinner(x) {
+        if (x == 'left') {
+          return document.getElementById("a").src.substring(document.getElementById("a").src.lastIndexOf('/')+1, document.getElementById("a").src.length-4);
+        } else {
+        return document.getElementById("b").src.substring(document.getElementById("b").src.lastIndexOf('/')+1, document.getElementById("b").src.length-4);
+        }
+      }
+
+
+      //Move on to next game after user selects winner
+      function select(x) {
+        switch(game){
+          //Round 1
+          case 1:
+          case 2:
+          case 3:
+          case 4:
+          case 5:
+          case 6:
+          case 7:
+            teams[game] = selectWinner(x);
+
+            //document.getElementById("test").innerHTML=teams;
+            a++;
+            b--;
+
+            nextGame[0] = 'img/' + region[i] + a + '.png';
+            nextGame[1] = 'img/' + region[i] + b + '.png';
+
+            randomPic (nextGame[0], nextGame[1]);
+            break;
+
+          //Last Game of Round 1
+          case 8:
+            teams[game] = selectWinner(x);
+
+            a = 1;
+            b = 8;
+
+            nextGame[0] = 'img/' +  teams[a] + '.png';
+            nextGame[1] = 'img/' +  teams[b] + '.png';
+
+            randomPic (nextGame[0], nextGame[1]);
+            break;
+
+          //Round 2
+          case 9:
+          case 10:
+          case 11:
+            teams[game] = selectWinner(x);
+
+            a++;
+            b--;
+
+            nextGame[0] = 'img/' +  teams[a] + '.png';
+            nextGame[1] = 'img/' +  teams[b] + '.png';
+
+            randomPic (nextGame[0], nextGame[1]);
+            break;
+
+          //Last Game of Round 2
+          case 12:
+            teams[game] = selectWinner(x);
+
+            a = 9;
+            b = 12;
+
+            nextGame[0] = 'img/' +  teams[a] + '.png';
+            nextGame[1] = 'img/' +  teams[b] + '.png';
+
+            randomPic (nextGame[0], nextGame[1]);
+            break;
+
+          //1st Game of Round 3
+          case 13:
+            teams[game] = selectWinner(x);
+
+            a = 10;
+            b = 11;
+
+            nextGame[0] = 'img/' +  teams[a] + '.png';
+            nextGame[1] = 'img/' +  teams[b] + '.png';
+
+            randomPic (nextGame[0], nextGame[1]);
+            break;
+
+          //Last Game of Round 3
+          case 14:
+            teams[game] = selectWinner(x);
+
+            a = 13;
+            b = 14;
+
+            nextGame[0] = 'img/' +  teams[a] + '.png';
+            nextGame[1] = 'img/' +  teams[b] + '.png';
+
+            randomPic (nextGame[0], nextGame[1]);
+            break;
+
+          case 15:
+            teams[game] = selectWinner(x);
+
+            a = 15;
+
+            finalfour[i] = teams[a]
+            teams.shift();
+            region[i] = teams
+
+            //Restart for next region
+            i++;
+            teams = [];
+
+            if (i <= 3 ) {
+              game = 0;
+              a = 1
+              b = 16;
+
+              nextGame[0] = 'img/' + region[i] + a + '.png';
+              nextGame[1] = 'img/' +  region[i] + b +'.png';
+
+              randomPic (nextGame[0], nextGame[1]);
+            } else {	//Get ready for Final Four
+              a = 0;
+              b = 1;
+
+              nextGame[0] = 'img/' + finalfour[a] + '.png';
+              nextGame[1] = 'img/' + finalfour[b] +'.png';
+
+              randomPic (nextGame[0], nextGame[1]);
+
+              game = 59;
+            }
+            break;
+
+          //First Final Four Game
+          case 60:
+            finalfour[i] = selectWinner(x);
+
+            a = a + 2;
+            b = b + 2;
+
+            nextGame[0] = 'img/' + finalfour[a] + '.png';
+            nextGame[1] = 'img/' + finalfour[b] +'.png';
+
+            randomPic (nextGame[0], nextGame[1]);
+
+            i++;
+            break;
+
+          //Second Final Four Game
+          case 61:
+            finalfour[i] = selectWinner(x);
+
+            a = a + 2
+            b = b + 2
+
+            nextGame[0] = 'img/' + finalfour[4] + '.png';
+            nextGame[1] = 'img/' + finalfour[5] +'.png';
+
+            randomPic (nextGame[0], nextGame[1]);
+
+            i++;
+            break;
+
+          //National Championship
+          case 62:
+            finalfour[i] = selectWinner(x);
+
+            bracket();
+            break;
+
+            default:
+            break;
+        }
+
+        game++;
+      }
+
+      //Create Bracket Graphic
+      function bracket() {
+        var a = '<div id="bracket">';
+        var sections = ["s","w","e","m"];
+        var topOrBottom = ["t","b","t","b"];
+        var leftOrRight = ["L","L","R","R"];
+
+        //Loop through Round 1
+        for (j = 0; j < 4; j++) {
+          for (i = 1; i <= 16; i++) {
+            var teamName = sections[j] + i;
+            a = a + '<div class="teams round1' + leftOrRight[j] + '" id="' + topOrBottom[j] + i + '">' + allTeams[teamName] + '</div>';
+          }
+        }
+
+        //Loop through Games
+        for (j = 0; j < 4; j++) {
+          //Round 2 Games
+          for (i = 0; i < 8; i++) {
+            var teamName = region[j][i];
+            a = a + '<div class="teams round2' + leftOrRight[j] + '" id="' + topOrBottom[j] + '2-' + (i+1) + '">' + allTeams[teamName] + '</div>';
+          }
+          //Round 3 Games
+          for (i = 0; i < 4; i++) {
+            var teamName = region[j][i+8];
+            a = a + '<div class="teams round3' + leftOrRight[j] + '" id="' + topOrBottom[j] + '3-' + (i+1) + '">' + allTeams[teamName] + '</div>';
+          }
+          //Round 4 Games
+          for (i = 0; i < 2; i++) {
+            var teamName = region[j][i+12];
+            a = a + '<div class="teams round4' + leftOrRight[j] + '" id="' + topOrBottom[j] + '4-' + (i+1) + '">' + allTeams[teamName] + '</div>';
+          }
+          //Round 5 Games
+          for (i = 0; i < 1; i++) {
+            var teamName = region[j][i+14];
+            a = a + '<div class="teams round5' + leftOrRight[j] + '" id="' + topOrBottom[j] + '5-' + (i+1) + '">' + allTeams[teamName] + '</div>';
+          }
+        }
+
+        //Final Four
+        a= a +
+        '<div class="teams round6L">' + allTeams[finalfour[4]] + '</div>' +
+        '<div class="teams round6R">' + allTeams[finalfour[5]] + '</div>' +
+        '<img id="champ" src="img/' + finalfour[6] + '.png">' +
+        '<div class="teams round7">' + allTeams[finalfour[6]] + '</div>' +
+        '<div class="button" onclick="score()">Random Score</div>' +
+        '</div>';
+
+        document.getElementById("content").innerHTML = a;
+      }
+
+      //Create random score for tiebreaker
+      function score() {
+        alert(Math.floor(Math.random() * 91) + 70);
+      }
+    </script>
+  </body>
+</html>

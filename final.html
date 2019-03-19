@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+
+      #content {
+        width: 1024px;
+        margin: 0 auto;
+      }
+
+      #a, #b {
+        display:inline;
+        width: 455px;
+        height: 455px;
+      }
+
+      #bracket {
+      	width: 1024px;
+      	height: 905px;
+      	background-image: url("img/bracket.png");
+      	position: absolute;
+      }
+
+      .vertical-line{
+        width: 5px;
+        background-color: #666666;
+        height: 500px;
+        display: inline-block;
+        margin: 0px 50px;
+      }
+
+      #champ {
+        display:block;
+        width: 125px;
+        height: 125px;
+        margin: 385px auto 0;
+      }
+
+      .button {
+      	width: 100px;
+      	height: 37px;
+      	padding: 5px;
+      	background-color: #666666;
+      	font-family: sans-serif;
+      	color: white;
+      	position: absolute;
+      	text-align: center;
+      	top: 100px;
+      	left: 464px;
+      }
+
+      .teams{
+        width: 100px;
+        height: 10px;
+        font-size: 8pt;
+        position: absolute;
+        font-family: sans-serif
+      }
+
+      .round1L {
+        left: 22px;
+        text-align: left;
+      }
+      .round2L {
+        left: 105px;
+        text-align: left;
+      }
+      .round3L {
+        left: 186px;
+        text-align: left;
+      }
+      .round4L {
+        left: 267px;
+        text-align: left;
+      }
+      .round5L {
+        left: 348px;
+        text-align: left;
+      }
+      .round6L {
+        top: 345px;
+        left: 435px;
+        text-align: left;
+      }
+      .round1R {
+        left:900px;
+        text-align: right;
+      }
+      .round2R {
+        left:817px;
+        text-align: right;
+      }
+      .round3R {
+        left:736px;
+        text-align: right;
+      }
+      .round4R {
+        left: 655px;
+        text-align: right;
+      }
+      .round5R {
+        left: 576px;
+        text-align: right;
+      }
+      .round6R {
+        top: 578px;
+        left: 491px;
+        text-align: right;
+      }
+      .round7 {
+        top: 520px;
+        width:100%;
+        font-size: 18pt;
+        text-align: center;
+      }
+
+      #t1 { top: 59px; }
+      #t16 { top: 85px; }
+      #t8 { top: 111px; }
+      #t9 { top: 137px; }
+      #t5 { top: 163px; }
+      #t12 { top: 189px; }
+      #t4 { top: 215px; }
+      #t13 { top: 240px; }
+      #t6 { top: 266px; }
+      #t11 { top: 292px; }
+      #t3 { top: 318px; }
+      #t14 { top: 344px; }
+      #t7 { top: 370px; }
+      #t10 { top: 396px; }
+      #t2 { top: 422px; }
+      #t15 { top: 449px; }
+      #t2-1 { top: 73px; }
+      #t2-8 { top: 125px; }
+      #t2-5 { top: 177px; }
+      #t2-4 { top: 229px; }
+      #t2-6 { top: 280px; }
+      #t2-3 { top: 332px; }
+      #t2-7 { top: 384px; }
+      #t2-2 { top: 436px; }
+      #t3-1 { top: 99px; }
+      #t3-4 { top: 203px; }
+      #t3-3 { top: 306px; }
+      #t3-2 { top: 410px; }
+      #t4-1 { top: 151px; }
+      #t4-2 { top: 358px; }
+      #t5-1 { top: 255px; }
+
+      #b1 { top: 475px; }
+      #b16 { top: 500px; }
+      #b8 { top: 526px; }
+      #b9 { top: 552px; }
+      #b5 { top: 578px; }
+      #b12 { top: 604px; }
+      #b4 { top: 630px; }
+      #b13 { top: 656px; }
+      #b6 { top: 681px; }
+      #b11 { top: 708px; }
+      #b3 { top: 734px; }
+      #b14 { top: 760px; }
+      #b7 { top: 786px; }
+      #b10 { top: 811px; }
+      #b2 { top: 838px; }
+      #b15 { top: 864px; }
+      #b2-1 { top: 488px; }
+      #b2-8 { top: 539px; }
+      #b2-5 { top: 591px; }
+      #b2-4 { top: 643px; }
+      #b2-6 { top: 695px; }
+      #b2-3 { top: 747px; }
+      #b2-7 { top: 799px; }
+      #b2-2 { top: 851px; }
+      #b3-1 { top: 513px; }
+      #b3-4 { top: 617px; }
+      #b3-3 { top: 721px; }
+      #b3-2 { top: 825px; }
+      #b4-1 { top: 565px; }
+      #b4-2 { top: 773px; }
+      #b5-1 { top: 670px; }
+    </style>
+  </head>
+  <body onload="bracket()">
+    <div id="content"></div>
+    </div>
+
+    <script>
+      var allTeams = {
+        "m1": "Kentucky", "m2": "Kansas", "m3": "Notre Dame", "m4": "Maryland", "m5": "West Virginia", "m6": "Butler", "m7": "Wichita St", "m8": "Cincinnati", "m9": "Purdue", "m10": "Indiana", "m11": "Texas", "m12": "Buffalo", "m13": "Valparaiso", "m14": "Northeastern", "m15": "New Mexico St", "m16": "Hampton",
+        "w1": "Wisconsin", "w2": "Arizona", "w3": "Baylor", "w4": "North Carolina", "w5": "Arkansas", "w6": "Xavier", "w7": "VCU", "w8": "Oregon", "w9": "Oklahoma St", "w10": "Ohio St", "w11": "Ole Miss", "w12": "Wofford", "w13": "Harvard", "w14": "Georgia St", "w15": "Texas Southern", "w16": "Coast Carolina",
+        "e1": "Villanova", "e2": "Virginia", "e3": "Oklahoma", "e4": "Louisville", "e5": "UNI", "e6": "Providence", "e7": "Michigan St", "e8": "N Carolina St", "e9": "LSU", "e10": "Georgia", "e11": "Dayton", "e12": "Wyoming", "e13": "UC Irvine", "e14": "Albany", "e15": "Belmont", "e16": "Lafayette",
+        "s1": "Duke", "s2": "Gonzaga", "s3": "Iowa St", "s4": "Georgetown", "s5": "Utah", "s6": "SMU", "s7": "Iowa", "s8": "San Diego St", "s9": "St John's", "s10": "Davidson", "s11": "UCLA", "s12": "SF Austin", "s13": "Eastern Wash", "s14": "UAB", "s15": "N Dakota St", "s16": "Robert Morris",
+      };
+
+      var region = [["m16","m15","m14","m4","m5","m11","m7","m8","m8","m7","m14","m4","m4","m14","m4"],["w16","w2","w3","w13","w5","w6","w10","w8","w16","w10","w6","w13","w13","w6","w13"],["e16","e2","e3","e4","e12","e11","e7","e8","e16","e7","e3","e4","e16","e3","e3"],["s16","s15","s3","s13","s12","s11","s10","s8","s8","s15","s3","s13","s8","s15","s8"]];
+      finalfour = ["m4","w13","e3","s8","m4","e3","m4"];
+
+      function bracket() {
+        var a = '<div id="bracket">';
+        var sections = ["m","w","e","s"];
+        var topOrBottom = ["t","b","t","b"];
+        var leftOrRight = ["L","L","R","R"];
+
+        //Loop through Round 1
+        for (j = 0; j < 4; j++) {
+          for (i = 1; i <= 16; i++) {
+            var teamName = sections[j] + i;
+            a = a + '<div class="teams round1' + leftOrRight[j] + '" id="' + topOrBottom[j] + i + '">' + allTeams[teamName] + '</div>';
+          }
+        }
+
+        //Loop through Games
+        for (j = 0; j < 4; j++) {
+          //Round 2 Games
+          for (i = 0; i < 8; i++) {
+            var teamName = region[j][i];
+            a = a + '<div class="teams round2' + leftOrRight[j] + '" id="' + topOrBottom[j] + '2-' + (i+1) + '">' + allTeams[teamName] + '</div>';
+          }
+          //Round 3 Games
+          for (i = 0; i < 4; i++) {
+            var teamName = region[j][i+8];
+            a = a + '<div class="teams round3' + leftOrRight[j] + '" id="' + topOrBottom[j] + '3-' + (i+1) + '">' + allTeams[teamName] + '</div>';
+          }
+          //Round 4 Games
+          for (i = 0; i < 2; i++) {
+            var teamName = region[j][i+12];
+            a = a + '<div class="teams round4' + leftOrRight[j] + '" id="' + topOrBottom[j] + '4-' + (i+1) + '">' + allTeams[teamName] + '</div>';
+          }
+          //Round 5 Games
+          for (i = 0; i < 1; i++) {
+            var teamName = region[j][i+14];
+            a = a + '<div class="teams round5' + leftOrRight[j] + '" id="' + topOrBottom[j] + '5-' + (i+1) + '">' + allTeams[teamName] + '</div>';
+          }
+        }
+
+        //Final Four
+        a= a +
+        '<div class="teams round6L">' + allTeams[finalfour[4]] + '</div>' +
+        '<div class="teams round6R">' + allTeams[finalfour[5]] + '</div>' +
+        '<img id="champ" src="img/' + finalfour[6] + '.png">' +
+        '<div class="teams round7">' + allTeams[finalfour[6]] + '</div>' +
+        '<div class="button" onclick="score()">Random Score</div>' +
+        '</div>';
+
+        document.getElementById("content").innerHTML = a;
+      }
+
+      function score() {
+        alert(Math.floor(Math.random() * 91) + 70);
+      }
+    </script>
+  </body>
+</html>
