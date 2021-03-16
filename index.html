@@ -10,24 +10,33 @@
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
     <link rel="shortcut icon" href="favicon.ico">
     <style type="text/css">
+      body {
+        margin: 0;
+        padding: 0;
+      }
       #content {
-        width: 1024px;
-        margin: 0 auto;
+        display: flex;
+        height: 100vh;
+        width: 100%;
+        max-width: 1024px;
       }
 
+      .outer-col {
+        flex: 1 0px;
+        margin: auto 2%;
+        text-align: center;
+      }
+
+      .center-col {
+        flex: none;
+        background-color: #666666;
+        width: 5px;
+        height: 90vh;
+        margin: 5vh auto;
+      }
       /*Logo Pictues*/
       #a, #b {
-        display:inline;
-        width: 455px;
-        height: 455px;
-      }
-
-      .vertical-line {
-        width: 5px;
-        background-color: #666666;
-        height: 500px;
-        display: inline-block;
-        margin: 0px 50px;
+        max-width: 100%;
       }
 
       /*For Bracket Graphics*/
@@ -188,15 +197,33 @@
       #b4-1 { top: 565px; }
       #b4-2 { top: 773px; }
       #b5-1 { top: 670px; }
+
+      @media all and (max-width: 500px) {
+        #content {
+          flex-direction: column;
+        }
+
+        .center-col {
+          height: 5px;
+          width: 90%;
+          margin: auto 5%;
+        }
+
+        #a, #b {
+          max-height: 50vh;
+        }
+      }
     </style>
   </head>
   <body onload="firstGame()">
     <div id="content">
-    <img id="a" src=# onclick="select('left')">
-    <div class="vertical-line"></div>
-    <img id="b" src=# onclick="select('right')">
+      <!-- <div class="vertical-line"></div> -->
+      <!--  -->
+      <!--  -->
+      <div class="outer-col"><img id="a" src=# onclick="select('left')"></div>
+      <div class="center-col"></div>
+      <div class="outer-col"><img id="b" src=# onclick="select('right')"></div>
     </div>
-    <p id="test"></p>
 
     <script>
       var game = 1;
@@ -317,7 +344,6 @@
           case 7:
             teams[game] = selectWinner(x);
 
-            //document.getElementById("test").innerHTML=teams;
             a++;
             b--;
 
