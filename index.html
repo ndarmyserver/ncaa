@@ -11,14 +11,16 @@
     <link rel="shortcut icon" href="favicon.ico">
     <style type="text/css">
       body {
-        margin: 0;
+        margin: 0 auto;
         padding: 0;
       }
+
       #content {
         display: flex;
         height: 100vh;
         width: 100%;
         max-width: 1024px;
+        margin: 0 auto;
       }
 
       .outer-col {
@@ -216,13 +218,15 @@
     </style>
   </head>
   <body onload="firstGame()">
-    <div id="content">
-      <!-- <div class="vertical-line"></div> -->
-      <!--  -->
-      <!--  -->
-      <div class="outer-col"><img id="a" src=# onclick="select('left')"></div>
-      <div class="center-col"></div>
-      <div class="outer-col"><img id="b" src=# onclick="select('right')"></div>
+    <div class="wrapper">
+      <div id="content">
+        <!-- <div class="vertical-line"></div> -->
+        <!--  -->
+        <!--  -->
+        <div class="outer-col"><img id="a" src=# onclick="select('left')"></div>
+        <div class="center-col"></div>
+        <div class="outer-col"><img id="b" src=# onclick="select('right')"></div>
+      </div>
     </div>
 
     <script>
