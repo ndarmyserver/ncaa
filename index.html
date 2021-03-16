@@ -202,75 +202,75 @@
       var a = 1
       var b = 16;
       var i = 0;
-      var region = ['e','w','s','m'];
+      var region = ['w','e','s','m'];
       var teams = new Array();
       var finalfour = new Array();
       var nextGame = new Array();
       var allTeams = {
-        "m1": "North Carolina",
-        "m2": "Kentucky",
-        "m3": "Houston",
-        "m4": "Kansas",
-        "m5": "Auburn",
-        "m6": "Iowa St",
-        "m7": "Wofford",
-        "m8": "Utah St",
-        "m9": "Washinton",
-        "m10": "Seton Hall",
-        "m11": "Ohio St",
-        "m12": "New Mexico St",
-        "m13": "Northeastern",
-        "m14": "Georgia St",
-        "m15": "Abilene Christian",
-        "m16": "Iona",
         "w1": "Gonzaga",
-        "w2": "Michigan",
-        "w3": "Texas Tech",
-        "w4": "Florida St",
-        "w5": "Marquette",
-        "w6": "Buffalo",
-        "w7": "Nevada",
-        "w8": "Syracuse",
-        "w9": "Baylor",
-        "w10": "Florida",
-        "w11": "Arizona St-St John's",
-        "w12": "Murray St",
-        "w13": "Vermont",
-        "w14": "Northern Kentucky",
-        "w15": "Montana",
-        "w16": "FD-PVA&M",
-        "e1": "Duke",
-        "e2": "Michigan St",
-        "e3": "LSU",
-        "e4": "Virginia Tech",
-        "e5": "Mississippi St",
-        "e6": "Marlyand",
-        "e7": "Louisville",
-        "e8": "VCU",
-        "e9": "UCF",
-        "e10": "Minnesota",
-        "e11": "Belmont-Temple",
-        "e12": "Liberty",
-        "e13": "Saint Louis",
-        "e14": "Yale",
-        "e15": "Bradley",
-        "e16": "ND St-NC Central",
-        "s1": "Virginia",
-        "s2": "Tennessee",
-        "s3": "Purdue",
-        "s4": "Kansas St",
-        "s5": "Wisconsin",
-        "s6": "Villanova",
-        "s7": "Cincinnati",
-        "s8": "Ole Miss",
-        "s9": "Oklahoma",
-        "s10": "Iowa",
-        "s11": "Saint Mary's",
-        "s12": "Oregon",
-        "s13": "UC Irvine",
-        "s14": "Old Dominion",
-        "s15": "Colgate",
-        "s16": "Gardner-Webb",
+        "w2": "Iowa",
+        "w3": "Kansas",
+        "w4": "Virginia",
+        "w5": "Creighton",
+        "w6": "USC",
+        "w7": "Oregon",
+        "w8": "Oklahoma",
+        "w9": "Missouri",
+        "w10": "VCU",
+        "w11": "Play in W11",
+        "w12": "UC Santa Barbara",
+        "w13": "Ohio",
+        "w14": "Eastern Washington",
+        "w15": "Grand Canyon",
+        "w16": "Play in W16",
+        "e1": "Michigan",
+        "e2": "Alabama",
+        "e3": "Texas",
+        "e4": "Florida St",
+        "e5": "Colorado",
+        "e6": "BYU",
+        "e7": "Connecticut",
+        "e8": "LSU",
+        "e9": "Saint Bonaventure",
+        "e10": "Maryland",
+        "e11": "Play in E11",
+        "e12": "Georgetown",
+        "e13": "UNC Greensboro",
+        "e14": "Abilene Christian",
+        "e15": "Iona",
+        "e16": "Play in E16",
+        "s1": "Baylor",
+        "s2": "Ohio St",
+        "s3": "Arkansas",
+        "s4": "Purdue",
+        "s5": "Villanova",
+        "s6": "Texas Tech",
+        "s7": "Florida",
+        "s8": "North Carolina",
+        "s9": "Wisconsin",
+        "s10": "Virginia Tech",
+        "s11": "Utah St",
+        "s12": "Winthrop",
+        "s13": "North Texas",
+        "s14": "Colgate",
+        "s15": "Oral Roberts",
+        "s16": "Hartford",
+        "m1": "Illinois",
+        "m2": "Houston",
+        "m3": "West Virginia",
+        "m4": "Oklahoma St",
+        "m5": "Tennessee",
+        "m6": "San Diego St",
+        "m7": "Clemson",
+        "m8": "Loyola - Chicago",
+        "m9": "Georgia Tech",
+        "m10": "Rutgers",
+        "m11": "Syracuse",
+        "m12": "Oregon St",
+        "m13": "Liberty",
+        "m14": "Morehead St",
+        "m15": "Cleveland St",
+        "m16": "Drexel"
       };
 
       //Select random picture sides (so higher seed isn't always on left)
@@ -286,16 +286,18 @@
 
       //Sort pictures for 1st game
       function firstGame() {
-        nextGame[0] = 'img/' + region[i] + a + '.png';
-        nextGame[1] = 'img/' + region[i] + b + '.png';
+        nextGame[0] = 'img/team_logos/' + allTeams[region[i] + a] + '.png';
+        nextGame[1] = 'img/team_logos/' + allTeams[region[i] + b] + '.png';
 
         randomPic (nextGame[0], nextGame[1]);
       }
 
       function selectWinner(x) {
         if (x == 'left') {
+          console.log(document.getElementById("a").src.substring(document.getElementById("a").src.lastIndexOf('/')+1, document.getElementById("a").src.length-4))
           return document.getElementById("a").src.substring(document.getElementById("a").src.lastIndexOf('/')+1, document.getElementById("a").src.length-4);
         } else {
+          console.log(document.getElementById("b").src.substring(document.getElementById("b").src.lastIndexOf('/')+1, document.getElementById("b").src.length-4))
         return document.getElementById("b").src.substring(document.getElementById("b").src.lastIndexOf('/')+1, document.getElementById("b").src.length-4);
         }
       }
@@ -318,8 +320,8 @@
             a++;
             b--;
 
-            nextGame[0] = 'img/' + region[i] + a + '.png';
-            nextGame[1] = 'img/' + region[i] + b + '.png';
+            nextGame[0] = 'img/team_logos/' + allTeams[region[i] + a] + '.png';
+            nextGame[1] = 'img/team_logos/' + allTeams[region[i] + b] + '.png';
 
             randomPic (nextGame[0], nextGame[1]);
             break;
@@ -331,8 +333,8 @@
             a = 1;
             b = 8;
 
-            nextGame[0] = 'img/' +  teams[a] + '.png';
-            nextGame[1] = 'img/' +  teams[b] + '.png';
+            nextGame[0] = 'img/team_logos/' +  teams[a] + '.png';
+            nextGame[1] = 'img/team_logos/' +  teams[b] + '.png';
 
             randomPic (nextGame[0], nextGame[1]);
             break;
@@ -346,8 +348,8 @@
             a++;
             b--;
 
-            nextGame[0] = 'img/' +  teams[a] + '.png';
-            nextGame[1] = 'img/' +  teams[b] + '.png';
+            nextGame[0] = 'img/team_logos/' +  teams[a] + '.png';
+            nextGame[1] = 'img/team_logos/' +  teams[b] + '.png';
 
             randomPic (nextGame[0], nextGame[1]);
             break;
@@ -359,8 +361,8 @@
             a = 9;
             b = 12;
 
-            nextGame[0] = 'img/' +  teams[a] + '.png';
-            nextGame[1] = 'img/' +  teams[b] + '.png';
+            nextGame[0] = 'img/team_logos/' +  teams[a] + '.png';
+            nextGame[1] = 'img/team_logos/' +  teams[b] + '.png';
 
             randomPic (nextGame[0], nextGame[1]);
             break;
@@ -372,8 +374,8 @@
             a = 10;
             b = 11;
 
-            nextGame[0] = 'img/' +  teams[a] + '.png';
-            nextGame[1] = 'img/' +  teams[b] + '.png';
+            nextGame[0] = 'img/team_logos/' +  teams[a] + '.png';
+            nextGame[1] = 'img/team_logos/' +  teams[b] + '.png';
 
             randomPic (nextGame[0], nextGame[1]);
             break;
@@ -385,8 +387,8 @@
             a = 13;
             b = 14;
 
-            nextGame[0] = 'img/' +  teams[a] + '.png';
-            nextGame[1] = 'img/' +  teams[b] + '.png';
+            nextGame[0] = 'img/team_logos/' +  teams[a] + '.png';
+            nextGame[1] = 'img/team_logos/' +  teams[b] + '.png';
 
             randomPic (nextGame[0], nextGame[1]);
             break;
@@ -409,16 +411,16 @@
               a = 1
               b = 16;
 
-              nextGame[0] = 'img/' + region[i] + a + '.png';
-              nextGame[1] = 'img/' +  region[i] + b +'.png';
+              nextGame[0] = 'img/team_logos/' + allTeams[region[i] + a] + '.png';
+              nextGame[1] = 'img/team_logos/' +  allTeams[region[i] + b] +'.png';
 
               randomPic (nextGame[0], nextGame[1]);
             } else {	//Get ready for Final Four
               a = 0;
               b = 1;
 
-              nextGame[0] = 'img/' + finalfour[a] + '.png';
-              nextGame[1] = 'img/' + finalfour[b] +'.png';
+              nextGame[0] = 'img/team_logos/' + finalfour[a] + '.png';
+              nextGame[1] = 'img/team_logos/' + finalfour[b] +'.png';
 
               randomPic (nextGame[0], nextGame[1]);
 
@@ -433,8 +435,8 @@
             a = a + 2;
             b = b + 2;
 
-            nextGame[0] = 'img/' + finalfour[a] + '.png';
-            nextGame[1] = 'img/' + finalfour[b] +'.png';
+            nextGame[0] = 'img/team_logos/' + finalfour[a] + '.png';
+            nextGame[1] = 'img/team_logos/' + finalfour[b] +'.png';
 
             randomPic (nextGame[0], nextGame[1]);
 
@@ -448,8 +450,8 @@
             a = a + 2
             b = b + 2
 
-            nextGame[0] = 'img/' + finalfour[4] + '.png';
-            nextGame[1] = 'img/' + finalfour[5] +'.png';
+            nextGame[0] = 'img/team_logos/' + finalfour[4] + '.png';
+            nextGame[1] = 'img/team_logos/' + finalfour[5] +'.png';
 
             randomPic (nextGame[0], nextGame[1]);
 
@@ -473,7 +475,7 @@
       //Create Bracket Graphic
       function bracket() {
         var a = '<div id="bracket">';
-        var sections = ["e","w","s","m"];
+        var sections = ["w","e","s","m"];
         var topOrBottom = ["t","b","t","b"];
         var leftOrRight = ["L","L","R","R"];
 
@@ -490,31 +492,31 @@
           //Round 2 Games
           for (i = 0; i < 8; i++) {
             var teamName = region[j][i];
-            a = a + '<div class="teams round2' + leftOrRight[j] + '" id="' + topOrBottom[j] + '2-' + (i+1) + '">' + allTeams[teamName] + '</div>';
+            a = a + '<div class="teams round2' + leftOrRight[j] + '" id="' + topOrBottom[j] + '2-' + (i+1) + '">' + teamName.replaceAll("%20", " ") + '</div>';
           }
           //Round 3 Games
           for (i = 0; i < 4; i++) {
             var teamName = region[j][i+8];
-            a = a + '<div class="teams round3' + leftOrRight[j] + '" id="' + topOrBottom[j] + '3-' + (i+1) + '">' + allTeams[teamName] + '</div>';
+            a = a + '<div class="teams round3' + leftOrRight[j] + '" id="' + topOrBottom[j] + '3-' + (i+1) + '">' + teamName.replaceAll("%20", " ") + '</div>';
           }
           //Round 4 Games
           for (i = 0; i < 2; i++) {
             var teamName = region[j][i+12];
-            a = a + '<div class="teams round4' + leftOrRight[j] + '" id="' + topOrBottom[j] + '4-' + (i+1) + '">' + allTeams[teamName] + '</div>';
+            a = a + '<div class="teams round4' + leftOrRight[j] + '" id="' + topOrBottom[j] + '4-' + (i+1) + '">' + teamName.replaceAll("%20", " ") + '</div>';
           }
           //Round 5 Games
           for (i = 0; i < 1; i++) {
             var teamName = region[j][i+14];
-            a = a + '<div class="teams round5' + leftOrRight[j] + '" id="' + topOrBottom[j] + '5-' + (i+1) + '">' + allTeams[teamName] + '</div>';
+            a = a + '<div class="teams round5' + leftOrRight[j] + '" id="' + topOrBottom[j] + '5-' + (i+1) + '">' + teamName.replaceAll("%20", " ") + '</div>';
           }
         }
 
         //Final Four
         a= a +
-        '<div class="teams round6L">' + allTeams[finalfour[4]] + '</div>' +
-        '<div class="teams round6R">' + allTeams[finalfour[5]] + '</div>' +
-        '<img id="champ" src="img/' + finalfour[6] + '.png">' +
-        '<div class="teams round7">' + allTeams[finalfour[6]] + '</div>' +
+        '<div class="teams round6L">' + finalfour[4].replaceAll("%20", " ") + '</div>' +
+        '<div class="teams round6R">' + finalfour[5].replaceAll("%20", " ") + '</div>' +
+        '<img id="champ" src="img/team_logos/' + finalfour[6] + '.png">' +
+        '<div class="teams round7">' + finalfour[6].replaceAll("%20", " ") + '</div>' +
         '<div class="button" onclick="score()">Random Score</div>' +
         '</div>';
 
