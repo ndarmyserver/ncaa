@@ -20,6 +20,13 @@
         padding: 0;
       }
 
+      h1 {
+        color: #D3D3D3;
+        font-family: sans-serif;
+        margin: 0;
+        text-align: center
+      }
+
       #content {
         display: flex;
         height: 100vh;
@@ -228,115 +235,129 @@
         <!-- <div class="vertical-line"></div> -->
         <!--  -->
         <!--  -->
-        <div class="outer-col"><img id="a" src=# onclick="select('left')"></div>
+        <div class="outer-col"><img id="a" src=# onclick="select('left')"><h1 id="aSeed"></h1></div>
         <div class="center-col"></div>
-        <div class="outer-col"><img id="b" src=# onclick="select('right')"></div>
+        <div class="outer-col"><img id="b" src=# onclick="select('right')"><h1 id="bSeed"></h1></div>
       </div>
     </div>
 
     <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const showSeeds = urlParams.get('seeds');
+      if (showSeeds === "true") {
+        console.log("we showing seeds baby");
+      } else {
+        document.getElementById('aSeed').style.display = 'none';
+        document.getElementById('bSeed').style.display = 'none';
+      }
       var game = 1;
       var a = 1
       var b = 16;
       var i = 0;
-      var region = ['w','e','s','m'];
+      var region = ['s','e','m','w'];
       var teams = new Array();
       var finalfour = new Array();
       var nextGame = new Array();
+      var nextGameSeeds = new Array();
       var allTeams = {
-        "w1": "Gonzaga",
-        "w16": "Georgia St",
-        "w8": "Boise St",
-        "w9": "Memphis",
-        "w5": "Connecticut",
-        "w12": "New Mexico St",
-        "w4": "Arkansas",
-        "w13": "Vermont",
-        "w6": "Alabama",
-        "w11": "Play in W11",
-        "w3": "Texas Tech",
-        "w14": "Montana St",
-        "w7": "Michigan St",
-        "w10": "Davidson",
-        "w2": "Duke",
-        "w15": "Cal St - Fullerton",
-        "e1": "Baylor",
-        "e16": "Norfolk St",
-        "e8": "North Carolina",
-        "e9": "Marquette",
-        "e5": "Saint Mary's",
-        "e12": "Play in E12",
-        "e4": "UCLA",
-        "e13": "Akron",
-        "e6": "Texas",
-        "e11": "Virginia Tech",
-        "e3": "Purdue",
-        "e14": "Yale",
-        "e7": "Murray St",
-        "e10": "San Francisco",
-        "e2": "Kentucky",
-        "e15": "Saint Peter's",
-        "s1": "Arizona",
+        "s1": "Alabama",
         "s16": "Play in S16",
-        "s8": "Seton Hall",
-        "s9": "TCU",
-        "s5": "Houston",
-        "s12": "UAB",
-        "s4": "Illinois",
-        "s13": "Chattanooga",
-        "s6": "Colorado St",
-        "s11": "Michigan",
-        "s3": "Tennessee",
-        "s14": "Longwood",
-        "s7": "Ohio St",
-        "s10": "Loyola - Chicago",
-        "s2": "Villanova",
-        "s15": "Delaware",
-        "m1": "Kansas",
-        "m16": "Play in M16",
-        "m8": "San Diego St",
-        "m9": "Creighton",
-        "m5": "Iowa",
-        "m12": "Richmond",
-        "m4": "Providence",
-        "m13": "South Dakota St",
-        "m6": "LSU",
-        "m11": "Iowa St",
-        "m3": "Wisconsin",
-        "m14": "Colgate",
-        "m7": "USC",
-        "m10": "Miami",
-        "m2": "Auburn",
-        "m15": "Jacksonville St"
+        "s8": "Maryland",
+        "s9": "West Virginia",
+        "s5": "San Diego St",
+        "s12": "Charleston",
+        "s4": "Virginia",
+        "s13": "Furman",
+        "s6": "Creighton",
+        "s11": "North Carolina St",
+        "s3": "Baylor",
+        "s14": "UC Santa Barbara",
+        "s7": "Missouri",
+        "s10": "Utah St",
+        "s2": "Arizona",
+        "s15": "Princeton",
+        "e1": "Purdue",
+        "e16": "Play in E16",
+        "e8": "Memphis",
+        "e9": "Florida Atlantic",
+        "e5": "Duke",
+        "e12": "Oral Roberts",
+        "e4": "Tennessee",
+        "e13": "Louisiana",
+        "e6": "Kentucky",
+        "e11": "Providence",
+        "e3": "Kansas St",
+        "e14": "Montana St",
+        "e7": "Michigan St",
+        "e10": "USC",
+        "e2": "Marquette",
+        "e15": "Vermont",
+        "m1": "Houston",
+        "m16": "Northern Kentucky",
+        "m8": "Iowa",
+        "m9": "Auburn",
+        "m5": "Miami",
+        "m12": "Drake",
+        "m4": "Indiana",
+        "m13": "Kent St",
+        "m6": "Iowa St",
+        "m11": "Play in M11",
+        "m3": "Xavier",
+        "m14": "Kennesaw St",
+        "m7": "Texas A&M",
+        "m10": "Penn St",
+        "m2": "Texas",
+        "m15": "Colgate",
+        "w1": "Kansas",
+        "w16": "Howard",
+        "w8": "Arkansas",
+        "w9": "Illinois",
+        "w5": "Saint Mary's",
+        "w12": "VCU",
+        "w4": "Connecticut",
+        "w13": "Iona",
+        "w6": "TCU",
+        "w11": "Play in W11",
+        "w3": "Gonzaga",
+        "w14": "Grand Canyon",
+        "w7": "Northwestern",
+        "w10": "Boise St",
+        "w2": "UCLA",
+        "w15": "UNC Asheville"
       };
 
       //Select random picture sides (so higher seed isn't always on left)
       function randomPic(pic1, pic2) {
+        var team1 = pic1.replaceAll("%20", " ");
+        var team2 = pic2.replaceAll("%20", " ");
+        console.log(team1 + " vs " + team2);
         var r = Math.random();
+        var pic1Path = 'img/team_logos/' + team1 + '.png';
+        var pic2Path = 'img/team_logos/' + team2 + '.png';
+        var pic1Seed = Object.keys(allTeams).find(key => allTeams[key] === team1).substring(1);
+        var pic2Seed = Object.keys(allTeams).find(key => allTeams[key] === team2).substring(1);
 
         if (r < 0.5) {
-          return [document.getElementById("a").src = nextGame[0], document.getElementById("b").src = nextGame[1]];
+          return [document.getElementById("a").src = pic1Path, document.getElementById("aSeed").innerHTML = pic1Seed, document.getElementById("b").src = pic2Path, document.getElementById("bSeed").innerHTML = pic2Seed];
         } else {
-          return [document.getElementById("a").src = nextGame[1], document.getElementById("b").src = nextGame[0]];
+          return [document.getElementById("a").src = pic2Path, document.getElementById("aSeed").innerHTML = pic2Seed, document.getElementById("b").src = pic1Path, document.getElementById("bSeed").innerHTML = pic1Seed];
         }
       }
 
       //Sort pictures for 1st game
       function firstGame() {
-        nextGame[0] = 'img/team_logos/' + allTeams[region[i] + a] + '.png';
-        nextGame[1] = 'img/team_logos/' + allTeams[region[i] + b] + '.png';
-
-        randomPic (nextGame[0], nextGame[1]);
+        randomPic (allTeams[region[i] + a], allTeams[region[i] + b]);
       }
 
       function selectWinner(x) {
         if (x == 'left') {
-          console.log(document.getElementById("a").src.substring(document.getElementById("a").src.lastIndexOf('/')+1, document.getElementById("a").src.length-4))
-          return document.getElementById("a").src.substring(document.getElementById("a").src.lastIndexOf('/')+1, document.getElementById("a").src.length-4);
+          var teamName = document.getElementById("a").src.substring(document.getElementById("a").src.lastIndexOf('/')+1, document.getElementById("a").src.length-4);
         } else {
-          console.log(document.getElementById("b").src.substring(document.getElementById("b").src.lastIndexOf('/')+1, document.getElementById("b").src.length-4))
-        return document.getElementById("b").src.substring(document.getElementById("b").src.lastIndexOf('/')+1, document.getElementById("b").src.length-4);
+          var teamName = document.getElementById("b").src.substring(document.getElementById("b").src.lastIndexOf('/')+1, document.getElementById("b").src.length-4);
         }
+        console.log(teamName);
+        return teamName;
       }
 
 
@@ -356,10 +377,7 @@
             a++;
             b--;
 
-            nextGame[0] = 'img/team_logos/' + allTeams[region[i] + a] + '.png';
-            nextGame[1] = 'img/team_logos/' + allTeams[region[i] + b] + '.png';
-
-            randomPic (nextGame[0], nextGame[1]);
+            randomPic (allTeams[region[i] + a], allTeams[region[i] + b]);
             break;
 
           //Last Game of Round 1
@@ -369,10 +387,7 @@
             a = 1;
             b = 8;
 
-            nextGame[0] = 'img/team_logos/' +  teams[a] + '.png';
-            nextGame[1] = 'img/team_logos/' +  teams[b] + '.png';
-
-            randomPic (nextGame[0], nextGame[1]);
+            randomPic (teams[a], teams[b]);
             break;
 
           //Round 2
@@ -384,10 +399,7 @@
             a++;
             b--;
 
-            nextGame[0] = 'img/team_logos/' +  teams[a] + '.png';
-            nextGame[1] = 'img/team_logos/' +  teams[b] + '.png';
-
-            randomPic (nextGame[0], nextGame[1]);
+            randomPic (teams[a], teams[b]);
             break;
 
           //Last Game of Round 2
@@ -397,10 +409,7 @@
             a = 9;
             b = 12;
 
-            nextGame[0] = 'img/team_logos/' +  teams[a] + '.png';
-            nextGame[1] = 'img/team_logos/' +  teams[b] + '.png';
-
-            randomPic (nextGame[0], nextGame[1]);
+            randomPic (teams[a], teams[b]);
             break;
 
           //1st Game of Round 3
@@ -410,10 +419,7 @@
             a = 10;
             b = 11;
 
-            nextGame[0] = 'img/team_logos/' +  teams[a] + '.png';
-            nextGame[1] = 'img/team_logos/' +  teams[b] + '.png';
-
-            randomPic (nextGame[0], nextGame[1]);
+            randomPic (teams[a], teams[b]);
             break;
 
           //Last Game of Round 3
@@ -423,10 +429,7 @@
             a = 13;
             b = 14;
 
-            nextGame[0] = 'img/team_logos/' +  teams[a] + '.png';
-            nextGame[1] = 'img/team_logos/' +  teams[b] + '.png';
-
-            randomPic (nextGame[0], nextGame[1]);
+            randomPic (teams[a], teams[b]);
             break;
 
           case 15:
@@ -447,18 +450,12 @@
               a = 1
               b = 16;
 
-              nextGame[0] = 'img/team_logos/' + allTeams[region[i] + a] + '.png';
-              nextGame[1] = 'img/team_logos/' +  allTeams[region[i] + b] +'.png';
-
-              randomPic (nextGame[0], nextGame[1]);
+              randomPic (allTeams[region[i] + a], allTeams[region[i] + b]);
             } else {	//Get ready for Final Four
               a = 0;
               b = 1;
 
-              nextGame[0] = 'img/team_logos/' + finalfour[a] + '.png';
-              nextGame[1] = 'img/team_logos/' + finalfour[b] +'.png';
-
-              randomPic (nextGame[0], nextGame[1]);
+              randomPic (finalfour[a], finalfour[b]);
 
               game = 59;
             }
@@ -471,10 +468,7 @@
             a = a + 2;
             b = b + 2;
 
-            nextGame[0] = 'img/team_logos/' + finalfour[a] + '.png';
-            nextGame[1] = 'img/team_logos/' + finalfour[b] +'.png';
-
-            randomPic (nextGame[0], nextGame[1]);
+            randomPic (finalfour[a], finalfour[b]);
 
             i++;
             break;
@@ -486,10 +480,7 @@
             a = a + 2
             b = b + 2
 
-            nextGame[0] = 'img/team_logos/' + finalfour[4] + '.png';
-            nextGame[1] = 'img/team_logos/' + finalfour[5] +'.png';
-
-            randomPic (nextGame[0], nextGame[1]);
+            randomPic (finalfour[4], finalfour[5]);
 
             i++;
             break;
@@ -511,7 +502,7 @@
       //Create Bracket Graphic
       function bracket() {
         var a = '<div id="bracket">';
-        var sections = ["w","e","s","m"];
+        var sections = ["s","e","m","w"];
         var topOrBottom = ["t","b","t","b"];
         var leftOrRight = ["L","L","R","R"];
 
